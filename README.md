@@ -1,4 +1,4 @@
-This is the meow add-on.  It contains:
+This is the Bitcoin-Prices add-on.  It contains:
 
 * A program (lib/main.js).
 * A few tests.
