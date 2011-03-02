@@ -1,9 +1,12 @@
 {
-    "name": "bitcoinprices", 
-    "license": "MPL 1.1/GPL 2.0/LGPL 2.1", 
-    "author": "Corey Farwell", 
-    "version": "0.1", 
-    "fullName": "", 
-    "id": "jid0-gE6fXk2VSQ2MYANuOWvdRaWA3cw", 
-    "description": "Firefox extension displaying current Bitcoin prices"
+   "name": "bitcoinprices", 
+   "fullname": "Bitcoin Prices",
+   "description": "Firefox extension displaying current Bitcoin prices",
+   "license": "MPL 1.1/GPL 2.0/LGPL 2.1", 
+   "author": "Corey Farwell", 
+   "url": "https://github.com/frewsxcv/Bitcoin-Prices",
+   "version": "0.1", 
+   "fullName": "", 
+   "id": "jid0-gE6fXk2VSQ2MYANuOWvdRaWA3cw",
+   "logo": "data/bitcoinLogo.png"
 }
