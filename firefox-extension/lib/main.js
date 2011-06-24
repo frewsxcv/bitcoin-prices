@@ -4,9 +4,9 @@ const Panel = require("panel").Panel;
 const setInterval = require("timer").setInterval;
 
 var panel = Panel({
-   contentURL: "http://bitcoincharts.com/charts/chart.png?width=500&height=200&m=mtgoxUSD&k=&r=5&i=Hourly&c=0&s=&e=&Prev=&Next=&v=1&cv=0&ps=0&l=0&p=0&t=S&b=&a1=&m1=10&a2=&m2=25&x=0&i1=&i2=&i3=&i4=&SubmitButton=Draw&",
-    width: 500,
-    height: 248,
+   contentURL: "http://bitcoincharts.com/charts/chart.png?width=500&height=200&m=thUSD&k=&r=5&i=Hourly&c=0&s=&e=&Prev=&Next=&v=1&cv=0&ps=0&l=0&p=0&t=S&b=&a1=&m1=10&a2=&m2=25&x=0&i1=&i2=&i3=&i4=&SubmitButton=Draw&",
+   width: 500,
+   height: 248,
 });
 
 var widget = Widget({
@@ -22,13 +22,12 @@ var widget = Widget({
 
 function update() {
    Request({
-      url: "https://mtgox.com/code/data/ticker.php",
+      url: "https://api.tradehill.com/APIv1/USD/Ticker",
       onComplete: function (response) {
          price = response.json.ticker["buy"];
          price = Math.round(price*100)/100;
          price = price.toFixed(2);
          widget.content = "<div style='font-size:12px'>$" + price + "</div>";
-         console.log("price: " + price);
       }
    }).get();
 }
