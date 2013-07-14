@@ -2,7 +2,7 @@
    "name": "bitcoinprices", 
    "fullname": "Bitcoin Prices",
    "description": "Firefox extension displaying current Bitcoin prices",
-   "license": "MPL 1.1/GPL 2.0/LGPL 2.1", 
+   "license": "GPL 3.0", 
    "author": "Corey Farwell", 
    "url": "https://github.com/frewsxcv/Bitcoin-Prices",
    "version": "0.1.2", 
