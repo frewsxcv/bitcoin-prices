@@ -1,5 +1,3 @@
-This is the Bitcoin-Prices add-on.  It contains:
+# bitcoin-prices
 
-* A program (lib/main.js).
-* A few tests.
-* Some meager documentation.
+Simple Firefox addon to display the latest Bitcoin prices
