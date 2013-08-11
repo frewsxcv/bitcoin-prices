@@ -20,7 +20,9 @@
                   var sparkline = ev.sparklines[0],
                       region = sparkline.getCurrentRegionFields(),
                       value = region.y;
-                  addon.port.emit("mouseover", value);
+                  if (region.x !== undefined) {
+                    addon.port.emit("mouseover", value);
+                  }
               }).bind('mouseleave', function () {
                   addon.port.emit("mouseleave");
               });
