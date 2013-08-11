@@ -5,36 +5,47 @@
     const Request = require("sdk/request").Request;
     const Panel = require("sdk/panel").Panel;
     const setInterval = require("sdk/timers").setInterval;
+    const data = require("sdk/self").data;
 
-    var panel = Panel({
-        contentURL: "http://bitcoincharts.com/charts/chart.png?width=500&height=200&m=mtgoxUSD&k=&r=5&i=Hourly&c=0&s=&e=&Prev=&Next=&v=1&cv=0&ps=0&l=0&p=0&t=S&b=&a1=&m1=10&a2=&m2=25&x=0&i1=&i2=&i3=&i4=&SubmitButton=Draw&",
-        width: 500,
-        height: 250,
+    const sparklineWidget = new Widget({
+        label: "Bitcoin sparkline",
+        id: "bitcoin-sparkline",
+        contentURL: data.url("widgets/sparkline.html"),
+        width: 80,
     });
 
-    var widget = Widget({
-        label: "Current Bitcoin price",
-        id: "bitcoin-price-widget",
-        content: "<div style='font-size:12px'>$N/A</div>",
-        width: 55,
-        panel: panel,
+    const priceWidget = new Widget({
+        label: "Bitcoin price",
+        id: "bitcoin-price",
+        contentURL: data.url("widgets/price.html"),
+        width: 45,
         onClick: function() {
             update();
         }
     });
 
-    function update() {
-        Request({
-            url: "http://data.mtgox.com/api/2/BTCUSD/money/ticker_fast",
-            onComplete: function (response) {
-                var price = response.json.data.buy.value;
-                price = Math.round(price*100)/100;
-                price = price.toFixed(2);
-                widget.content = "<div style='font-size:12px'>$" + price + "</div>";
+    const update = function () {
+        (new Request({
+            url: "https://bitcoin-prices.herokuapp.com/api/v1/mtgox/usd/24h",
+            onComplete: function (res) {
+                var prices = [];
+                res.json.prices.forEach(function (price) {
+                    prices.push(price.p);
+                }); 
+                sparklineWidget.port.emit('update', prices);
+                priceWidget.port.emit('update', prices);
             }
-        }).get();
-    }
+        })).get();
+    };
+
+    sparklineWidget.port.on('mouseleave', function () {
+        priceWidget.port.emit('mouseleave');
+    });
+
+    sparklineWidget.port.on('mouseover', function (price) {
+        priceWidget.port.emit('mouseover', price);
+    });
 
     update();
-    setInterval(update, 4 * 60 * 1000); // rerun every 4 mintues 
+    setInterval(update, 10 * 60 * 1000); // rerun every 10 mintues
 }());

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <style>
+      #price {
+        font-family: 'Open Sans', sans-serif;
+        cursor: default;
+      }
+    </style>
+  </head>
+  <body>
+    <span id="price">hi</span>
+    <script src="jquery-2.0.3.min.js"></script>
+    <script>
+      $(function () {
+          "use strict";
+
+          var lastPrice;
+
+          var setPrice = (function () {
+              var $elem = $("#price");
+              return function (price) {
+                  price = (+price).toFixed(2);
+                  $elem.text("$" + price);
+              };
+          }());
+
+          var update = function (prices) {
+              lastPrice = prices[prices.length-1];
+              setPrice(lastPrice);
+          };
+
+          var mouseover = function (price) {
+              setPrice(price);
+          };
+
+          var mouseleave = function () {
+              setPrice(lastPrice);
+          };
+
+          addon.port.on("update", update);
+          addon.port.on("mouseover", mouseover);
+          addon.port.on("mouseleave", mouseleave);
+      });
+    </script>
+  </body>
+</html>
