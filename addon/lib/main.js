@@ -8,14 +8,14 @@
     const data = require("sdk/self").data;
 
     const sparklineWidget = new Widget({
-        label: "Bitcoin sparkline",
+        label: "Last 24 hours of Bitcoin prices (MtGox USD)",
         id: "bitcoin-sparkline",
         contentURL: data.url("widgets/sparkline.html"),
         width: 80,
     });
 
     const priceWidget = new Widget({
-        label: "Bitcoin price",
+        label: "Last Bitcoin price (MtGox USD)",
         id: "bitcoin-price",
         contentURL: data.url("widgets/price.html"),
         width: 45,
