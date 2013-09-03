@@ -23,6 +23,9 @@
               var $elem = $("#price");
               return function (price) {
                   price = (+price).toFixed(2);
+                  if (Number.isNaN(price)) {
+                    price = "N/A";
+                  }
                   $elem.text("$" + price);
               };
           }());
