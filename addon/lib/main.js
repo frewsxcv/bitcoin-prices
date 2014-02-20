@@ -26,7 +26,7 @@
 
     const update = function () {
         (new Request({
-            url: "https://bitcoin-prices.herokuapp.com/api/v1/mtgox/usd/24h",
+            url: "https://bitcoin-prices.herokuapp.com/api/v1/coinbase/usd/24h",
             onComplete: function (res) {
                 var prices = [];
                 res.json.prices.forEach(function (price) {
